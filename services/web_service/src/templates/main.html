@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flowers</title>
+</head>
+<body>
+    <h1>Welcome, {{ session['username'] }}!</h1>
+    <h2>Flowers</h2>
+    <ul>
+        {% for flower in flowers %}
+        <li>{{ flower.name }} - Price: ${{ flower.price }} - Quantity: {{ flower.quantity }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/logout">Logout</a>
+</body>
+</html>

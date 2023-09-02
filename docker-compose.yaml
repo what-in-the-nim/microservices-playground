@@ -1,0 +1,53 @@
+version: '1'
+services:
+  web_service:
+    build:
+      context: services/web_service
+    ports:
+      - 8888:8888
+    depends_on:
+      - order_service
+      - product_service
+      - user_service
+    networks:
+      - microservices_network
+    volumes:
+      - microservices_volume:/database
+
+  order_service:
+    build:
+      context: services/order_service
+    ports:
+      - 8001:8001
+    networks:
+      - microservices_network
+    volumes:
+      - microservices_volume:/database
+
+  product_service:
+    build:
+      context: services/product_service
+    ports:
+      - 8002:8002
+    networks:
+      - microservices_network
+    volumes:
+      - microservices_volume:/database
+
+  user_service:
+    build:
+      context: services/user_service
+    ports:
+      - 8003:8003
+    networks:
+      - microservices_network
+    volumes:
+      - microservices_volume:/database
+
+networks:
+  microservices_network:
+    driver: bridge
+
+volumes:
+  microservices_volume:
+    external: true
