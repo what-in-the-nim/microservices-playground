@@ -42,6 +42,12 @@ def get_new_product_id():
     return 1 if max_id is None else max_id + 1
 
 
+@app.get("/health")
+def health():
+    """Health check."""
+    return {"status": "ok"}
+
+
 @app.get("/products")
 def get_products():
     """Get all products (admin only)."""

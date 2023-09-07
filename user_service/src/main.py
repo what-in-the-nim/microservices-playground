@@ -50,6 +50,11 @@ def get_new_user_id():
     return 1 if max_id is None else max_id + 1
 
 
+@app.get("/health")
+def health():
+    """Health check."""
+    return {"status": "ok"}
+
 @app.get("/users")
 def get_users():
     """Get all users (admin only)."""

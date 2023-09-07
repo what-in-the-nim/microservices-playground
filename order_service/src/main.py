@@ -28,6 +28,12 @@ def get_new_order_id():
     return 1 if max_id is None else max_id + 1
 
 
+@app.get("/health")
+def health():
+    """Health check."""
+    return {"status": "ok"}
+
+
 @app.post("/orders/order")
 def create_order(customer_id: int, product_ids: list[int]):
     """
