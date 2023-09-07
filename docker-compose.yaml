@@ -1,8 +1,8 @@
-version: '1'
+version: "1"
 services:
   web_service:
     build:
-      context: services/web_service
+      context: web_service
     ports:
       - 8888:8888
     depends_on:
@@ -16,7 +16,7 @@ services:
 
   order_service:
     build:
-      context: services/order_service
+      context: order_service
     ports:
       - 8001:8001
     networks:
@@ -26,7 +26,7 @@ services:
 
   product_service:
     build:
-      context: services/product_service
+      context: product_service
     ports:
       - 8002:8002
     networks:
@@ -36,7 +36,7 @@ services:
 
   user_service:
     build:
-      context: services/user_service
+      context: user_service
     ports:
       - 8003:8003
     networks:

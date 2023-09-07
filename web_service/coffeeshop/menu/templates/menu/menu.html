@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Coffee Shop Menu</title>
+  </head>
+  <body>
+    <h1>Coffee Shop Menu</h1>
+    <ul>
+      {% for product in products %}
+      <li>
+        <h2>{{ product.name }}</h2>
+        <p>Description: {{ product.description }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Category: {{ product.category }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

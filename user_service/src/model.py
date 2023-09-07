@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class User(BaseModel):
@@ -28,7 +28,7 @@ class User(BaseModel):
 
     @staticmethod
     def get_password_hash(password: str) -> str:
-        """Get the password hash"""
+        """Get the password hash."""
         return hashlib.sha256(password.encode("utf-8")).hexdigest()
 
     def tuple(self, return_password=False):

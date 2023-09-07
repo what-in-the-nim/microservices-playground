@@ -19,9 +19,7 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 
 # Create a formatter for the console logs
-console_formatter = logging.Formatter(
-    "%(asctime)s [%(levelname)s]: %(message)s"
-)
+console_formatter = logging.Formatter("%(asctime)s [%(levelname)s]: %(message)s")
 console_handler.setFormatter(console_formatter)
 
 # Add the console handler to the root logger
@@ -34,7 +32,7 @@ app = FastAPI()
 
 
 def get_new_product_id():
-    """Get a new product ID"""
+    """Get a new product ID."""
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()
     cursor.execute("SELECT MAX(product_id) FROM products")
@@ -46,7 +44,7 @@ def get_new_product_id():
 
 @app.get("/products")
 def get_products():
-    """Get all products (admin only)"""
+    """Get all products (admin only)."""
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()
     cursor.execute("SELECT * FROM products")
@@ -68,7 +66,7 @@ def add_product(
     name: str, price: float, quantity: int, description: Optional[str] = None
 ):
     """
-    Add a new product with details and return a product ID
+    Add a new product with details and return a product ID.
     """
     # Randomly generate a product ID
     product_id = get_new_product_id()
@@ -96,7 +94,7 @@ def add_product(
 
 @app.get("/products/{product_id}")
 def get_product(product_id: int):
-    """Get a product by ID"""
+    """Get a product by ID."""
     # Retrieve the product from the database
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()
@@ -116,7 +114,7 @@ def get_product(product_id: int):
 
 @app.put("/products/{product_id}/update")
 def update_product(product_id: int, name: str, price: float):
-    """Update a product by ID"""
+    """Update a product by ID."""
     # Retrieve the product from the database
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()

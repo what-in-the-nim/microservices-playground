@@ -1,4 +1,3 @@
-Flask
-Flask-WTF
+Django
 httpx
 python-dotenv

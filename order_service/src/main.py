@@ -16,7 +16,7 @@ app = FastAPI()
 
 def get_new_order_id():
     """
-    Get a new order ID
+    Get a new order ID.
     """
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()
@@ -31,7 +31,7 @@ def get_new_order_id():
 @app.post("/orders/order")
 def create_order(customer_id: int, product_ids: list[int]):
     """
-    Create a new order with details and return an order ID and status
+    Create a new order with details and return an order ID and status.
     """
     # Randomly generate an order ID
     order_id = get_new_order_id()
@@ -53,7 +53,7 @@ def create_order(customer_id: int, product_ids: list[int]):
 
 @app.get("/orders/{order_id}")
 def get_order(order_id: int):
-    """Get an order by ID"""
+    """Get an order by ID."""
     # Retrieve the order from the database
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()
@@ -72,7 +72,7 @@ def get_order(order_id: int):
 @app.get("/orders/user/{customer_id}")
 def get_customer_orders(customer_id: int):
     """
-    Get all orders for a customer
+    Get all orders for a customer.
     """
     # Retrieve customer orders from the database
     database = sqlite3.connect(DATABASE_PATH)
@@ -92,7 +92,7 @@ def get_customer_orders(customer_id: int):
 @app.put("/orders/{order_id}/status")
 def update_order_status(order_id: int, status: OrderStatus):
     """
-    Update the status of an order
+    Update the status of an order.
     """
     assert status in OrderStatus, "Invalid order status"
     # Update the order status in the database
@@ -117,7 +117,7 @@ def update_order_status(order_id: int, status: OrderStatus):
 
 @app.delete("/orders/{order_id}")
 def cancel_order(order_id: int):
-    """Cancel an order"""
+    """Cancel an order."""
     # Retrieve the order from the database
     database = sqlite3.connect(DATABASE_PATH)
     cursor = database.cursor()

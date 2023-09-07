@@ -19,9 +19,7 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 
 # Create a formatter for the console logs
-console_formatter = logging.Formatter(
-    "%(asctime)s [%(levelname)s]: %(message)s"
-)
+console_formatter = logging.Formatter("%(asctime)s [%(levelname)s]: %(message)s")
 console_handler.setFormatter(console_formatter)
 
 # Add the console handler to the root logger
@@ -40,7 +38,7 @@ app = FastAPI()
 
 
 def get_new_user_id():
-    """Get a new user ID"""
+    """Get a new user ID."""
     database = sqlite3.connect(DATABASE_PATH)
     logging.info("Connected to database")
     cursor = database.cursor()
@@ -54,7 +52,7 @@ def get_new_user_id():
 
 @app.get("/users")
 def get_users():
-    """Get all users (admin only)"""
+    """Get all users (admin only)."""
     database = sqlite3.connect(DATABASE_PATH)
     logging.info("Connected to database")
     cursor = database.cursor()
@@ -69,7 +67,7 @@ def get_users():
 @app.post("/users/register")
 def register(username: str, email: str, password: str):
     """
-    Create a new user with details and return a user ID
+    Create a new user with details and return a user ID.
     """
     # Randomly generate a user ID
     user_id = get_new_user_id()
@@ -81,9 +79,7 @@ def register(username: str, email: str, password: str):
     logging.info(f"Email: {email}")
     logging.info(f"Password Hash: {password_hash}")
 
-    user = User(
-        id=user_id, username=username, email=email, password_hash=password_hash
-    )
+    user = User(id=user_id, username=username, email=email, password_hash=password_hash)
     logging.info(f"is_admin: {user.is_admin}")
     # Save the user to the database
     logging.info("Connecting to database")
@@ -103,15 +99,13 @@ def register(username: str, email: str, password: str):
     cursor.close()
     database.close()
     # Return the JSON response
-    return JSONResponse(
-        content={"message": "Register completed"}, status_code=200
-    )
+    return JSONResponse(content={"message": "Register completed"}, status_code=200)
 
 
 @app.post("/users/login")
 def login(username: str, password: str):
     """
-    Login a user and return a user ID
+    Login a user and return a user ID.
     """
     # Retrieve the user from the database
     logging.info("Login request")
@@ -126,9 +120,7 @@ def login(username: str, password: str):
     # Check if the user exists
     if user is None:
         logging.info(f"User: {username} not found")
-        return JSONResponse(
-            content={"error": "User not found"}, status_code=404
-        )
+        return JSONResponse(content={"error": "User not found"}, status_code=404)
 
     logging.info("User: found")
     user = User.from_tuple(user)
@@ -137,9 +129,7 @@ def login(username: str, password: str):
     # Check if the password is correct
     if User.get_password_hash(password) != user.password_hash:
         logging.info(f"Incorrect password for {user.username}")
-        return JSONResponse(
-            content={"error": "Incorrect password"}, status_code=401
-        )
+        return JSONResponse(content={"error": "Incorrect password"}, status_code=401)
 
     # Return the user ID
     logging.info(f"Successfully logged in as {user.username} ({user.id})")
